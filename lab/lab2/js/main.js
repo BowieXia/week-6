@@ -123,11 +123,19 @@ of the application to report this information.
 
 ===================== */
 
-var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson"
+var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
 var featureGroup;
+var LayerID;
 
 var myStyle = function(feature) {
-  return {};
+  switch (feature.properties.COLLDAY) {
+      case 'MON': return {color: "#1abc9c"};
+      case 'TUE':   return {color: "#3498db"};
+      case 'WED': return {color: "#9b59b6"};
+      case 'THU':   return {color: "#34495e"};
+      case 'FRI': return {color: "#e67e22"};
+  }
+  //return {color: "#000000"};
 };
 
 var showResults = function() {
@@ -142,6 +150,16 @@ var showResults = function() {
   // => <div id="results">
   $('#results').show();
 };
+var closeResults = function() {
+    $('#intro').show();
+    // => <div id="results">
+    $('#results').hide();
+};
+$(".CloseButton").click(function(){
+  $('#intro').toggle();
+  // => <div id="results">
+  $('#results').toggle();
+});
 
 
 var eachFeatureFunction = function(layer) {
@@ -151,24 +169,61 @@ var eachFeatureFunction = function(layer) {
     Check out layer.feature to see some useful data about the layer that
     you can use in your application.
     ===================== */
-    console.log(layer.feature);
-    showResults();
+    //console.log(layer.feature.properties);
+
+    //var LayerID = featureGroup.getLayerId();
+
+    var LatLngBounds = layer.getBounds();
+    LayerID = layer._leaflet_id;
+  //  console.log(LayerID);
+    //console.log(LatLngBounds);
+    map.fitBounds(LatLngBounds);
+    switch (layer.feature.properties.COLLDAY) {
+        case 'MON':  return {
+          date:$(".day-of-week").text("Monday"),
+          LayerID: $(".LayersID").text(LayerID)
+      };
+        case 'TUE':  return {
+          date:$(".day-of-week").text("Tuesday"),
+          LayerID: $(".LayersID").text(LayerID)
+      };
+        case 'WED':  return {
+          date:$(".day-of-week").text("Wendesday"),
+          LayerID: $(".LayersID").text(LayerID)
+      };
+        case 'THU':  return {
+          date:$(".day-of-week").text("Thursday"),
+          LayerID: $(".LayersID").text(LayerID)
+      };
+        case 'FRI':  return {
+          date:$(".day-of-week").text("Friday"),
+          LayerID: $(".LayersID").text(LayerID)
+      };
+    }
+
   });
+  showResults();
 };
 
 var myFilter = function(feature) {
-  return true;
+  if (feature.properties.COLLDAY !== " ") {
+    return feature;
+  }
+  //return true;
 };
 
+
+
 $(document).ready(function() {
+
   $.ajax(dataset).done(function(data) {
     var parsedData = JSON.parse(data);
     featureGroup = L.geoJson(parsedData, {
       style: myStyle,
       filter: myFilter
     }).addTo(map);
-
     // quite similar to _.each
     featureGroup.eachLayer(eachFeatureFunction);
   });
+
 });
