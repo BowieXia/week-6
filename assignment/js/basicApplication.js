@@ -14,6 +14,20 @@ functions that will be used in your application. To test it out, try calling the
 console. For example, try running: clickNextButton() and see what it does. Use lots of console logs!
 ================================ */
 
+// var map = L.map('map', {
+//   center: [40.000, -75.1090],
+//   zoom: 11
+// });
+// var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+//   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+//   subdomains: 'abcd',
+//   minZoom: 0,
+//   maxZoom: 20,
+//   ext: 'png'
+// }).addTo(map);
+
+
+
 var state = {
   "slideNumber": 0, // slideNumber keeps track of what slide you are on. It should increase when you
                     // click the next button and decrease when you click the previous button. It
@@ -38,15 +52,31 @@ var state = {
   ]
 };
 
-var clickNextButton = function() {
 
-}
+var clickNextButton = function() {
+  console.log("Clicked Next Button, although it did nothing");
+};
 
 var clickPreviousButton = function() {
+  console.log("Clicked Previous Button, although it did nothing");
+};
 
-}
-
-var saySlideName = function(slide) {
+var saySlideName = function() {
   // saySlideName uses console.log to "say" the name of the slide it is given. It should run when
   // someone clicks on one of the buttons.
-}
+  console.log("Clicked Next Button, although it did nothing");
+  ///Use $.() to call the name of slide
+};
+
+$("#PreviousButton").click(function(){
+  //clickPreviousButton();
+  console.log("Clicked Previous Button, although it did nothing");
+});
+
+$("#NextButton").click(function(){
+  clickNextButton();
+});
+
+$("#ShowTitle").click(function(){
+  saySlideName();
+});

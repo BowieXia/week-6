@@ -9,8 +9,39 @@
     <!-- End HTML -->
 
     <!-- Start Javascript Imports -->
-    <script src="basicApplication.js"></script>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-2.2.0.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/basicApplication.js"></script>
     <!-- End Javascript Imports -->
+    <div class="sidebar">
+      <!-- =====================
+      Add elements in this space
+      ====================== -->
+      <h1 id="main-heading">Crime Data Mapping</h1>
+      <label id="text-label1" for="text-input1">Data Soure URL</label>
+      <input id="text-input1" class="input-text" type="text" placeholder="URL" >
+      <br>
+      <br>
+      <label id="text-label2" for="text-input2">Latitude Key</label>
+      <input id="text-input2" class="input-text" type="text" placeholder="Latitude Key" >
+      <br>
+      <br>
+      <label id="text-label3" for="text-input3">Longitude Key</label>
+      <input id="text-input3" class="input-text" type="text" placeholder="Longitude Key" >
+      <br>
+      <button id="MapData">Mapping!</button>
+      <button id="PreviousButton">Previous!</button>
+      <button id="NextButton">Next!</button>
+      <button id="ShowTitle">Show Title!</button>
+    </div>
+    <!-- Map -->
+    <div id="map" class="map"></div>
+    <!-- Javascript Imports -->
+
 
   </body>
 </html>
